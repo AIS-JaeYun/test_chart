@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart Multiple Axes</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<!-- <canvas id="myChart"></canvas> -->
+    <canvas id="myChart" style="display: block; width: 924px; height: 462px;" width="924" height="462" class="chartjs-render-monitor"></canvas>
+</head>
+
+<body>
+    <script>
+        
+		var barChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+                type:'line',
+				label: 'Dataset 1',
+				backgroundColor: 'blue',
+				yAxisID: 'y-axis-1',
+                data: [200, 110, 355, 120, 220, 330, 145],
+                order: 1,
+                fill : false
+			}, {
+                type:'bar',
+				label: 'Dataset 2',
+				backgroundColor: 'green',
+				yAxisID: 'y-axis-2',
+                data: [15, 2, 21,10, 30, 45, 5]
+			}, {
+                type:'bar',
+				label: 'Dataset 3',
+				backgroundColor: 'red',
+				yAxisID: 'y-axis-2',
+                data: [50, 10, 5, 2, 20, 30, 45]
+			}
+        
+        ]
+
+		};
+		window.onload = function() {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Chart.js Bar Chart - Multi Axis'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					},
+					scales: {
+						yAxes: [{
+							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+							display: true,
+							position: 'right',
+							id: 'y-axis-1',
+						}, {
+							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+							display: true,
+							position: 'left',
+							id: 'y-axis-2',
+							gridLines: {
+								drawOnChartArea: false
+							}
+						}],
+					}
+				}
+			});
+		};
+
+
+
+
+
+// 	var ctx = document.getElementById('myChart').getContext('2d');
+// var chart = new Chart(ctx, {
+//     // The type of chart we want to create
+//     type: 'bar',
+
+//     // The data for our dataset
+//     data: {
+//         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//         datasets: [{
+//             label: 'My First dataset',
+//             backgroundColor: 'rgb(255, 99, 132)',
+//             borderColor: 'rgb(255, 99, 132)',
+//             data: [0, 10, 5, 2, 20, 30, 45]
+//         }]
+//     },
+
+//     // Configuration options go here
+//     options: {}
+// });
+</script>
+</body>
+
+</html>
